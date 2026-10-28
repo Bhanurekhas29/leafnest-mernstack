@@ -11,7 +11,8 @@ export let pool;
 const tables = [
   `CREATE TABLE IF NOT EXISTS admins (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(190) NOT NULL UNIQUE,
+    username VARCHAR(60) NULL UNIQUE,
+    email VARCHAR(190) NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
     is_active TINYINT(1) NOT NULL DEFAULT 1,
     last_login DATETIME NULL,
@@ -152,7 +153,11 @@ export async function initDb() {
   for (const sql of tables) await pool.query(sql);
 
   const [usernameCol] = await pool.query("SHOW COLUMNS FROM admins LIKE 'username'");
-  if (!usernameCol.length) await pool.query('ALTER TABLE admins ADD COLUMN username VARCHAR(60) NULL UNIQUE AFTER id');
+  if (!usernameCol.length) {
+    // Two steps: TiDB cannot add a UNIQUE column in a single ALTER.
+    await pool.query('ALTER TABLE admins ADD COLUMN username VARCHAR(60) NULL AFTER id');
+    await pool.query('CREATE UNIQUE INDEX admins_username_uq ON admins (username)');
+  }
 
   const [[{ n }]] = await pool.query('SELECT COUNT(*) n FROM admins');
   const hash = await bcrypt.hash(process.env.ADMIN_PASSWORD, 10);
