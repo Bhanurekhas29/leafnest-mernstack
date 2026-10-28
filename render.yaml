@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: leafnest
+    runtime: node
+    plan: free
+    buildCommand: npm install --prefix frontend && npm run build --prefix frontend && npm install --prefix backend
+    startCommand: npm start --prefix backend
+    healthCheckPath: /api/public/content
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: DB_SSL
+        value: "true"
+      - key: DB_PORT
+        value: "4000"
+      - key: DB_NAME
+        value: leafnest
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_USERNAME
+        value: admin
+      - key: ADMIN_EMAIL
+        value: admin@leafnest.in
+      # Set these in the Render dashboard (they are secrets):
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: DB_HOST
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: CLIENT_URL
+        sync: false

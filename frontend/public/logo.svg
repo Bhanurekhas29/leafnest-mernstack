@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Google Material Symbols "potted_plant" (Apache 2.0) on a solid green tile -->
+  <rect width="64" height="64" rx="18" fill="#22c870"/>
+  <g transform="translate(10 10) scale(.04583) translate(0 960)" fill="#04281b">
+    <path d="M317-80q-20 0-36.500-12.500T259-125l-52-205h546l-52 205q-5 20-21.500 32.500T643-80H317Zm163-561q5-88 67-150t149-83q4-1 7.500-.5t6.500 3.500q3 3 4 6.500t0 7.500q-17 79-71 138t-133 74v95h300q13 0 21.500 8.500T840-520v100q0 25-17.500 42.500T780-360H180q-25 0-42.500-17.500T120-420v-100q0-13 8.500-21.500T150-550h300v-95q-79-15-133-74t-71-138q-1-4 0-7.500t4-6.500q3-3 6.500-4t7.500 0q88 20 150 83t66 151Z"/>
+  </g>
+</svg>
